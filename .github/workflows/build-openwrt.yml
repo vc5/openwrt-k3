@@ -28,7 +28,7 @@ env:
   DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: true
+  UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: true
   TZ: Asia/Shanghai
 
@@ -56,7 +56,7 @@ jobs:
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
 
-    - name: add third-party package
+    - name: Add third-party package
       run: |
         echo "src-git lienol https://github.com/Lienol/openwrt-package" >> openwrt/feeds.conf.default
         git clone --depth 1 https://github.com/tty228/luci-app-serverchan -b master openwrt/package/luci-app-serverchan
