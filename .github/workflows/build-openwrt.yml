@@ -29,7 +29,7 @@ env:
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
-  UPLOAD_COWTRANSFER: false
+  UPLOAD_COWTRANSFER: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -55,6 +55,13 @@ jobs:
 
     - name: Clone source code
       run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+
+    - name: add third-party package
+      run: |
+        echo "src-git lienol https://github.com/Lienol/openwrt-package" >> openwrt/feeds.conf.default
+        git clone --depth 1 https://github.com/tty228/luci-app-serverchan -b master openwrt/package/luci-app-serverchan
+        git clone --depth 1 https://github.com/lwz322/luci-app-k3screenctrl -b master openwrt/package/luci-app-k3screenctrl
+        git clone --depth 1 https://github.com/lwz322/k3screenctrl -b master openwrt/package/k3screenctrl
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
