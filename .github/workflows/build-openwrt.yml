@@ -61,7 +61,8 @@ jobs:
         echo "src-git lienol https://github.com/Lienol/openwrt-package" >> openwrt/feeds.conf.default
         git clone --depth 1 https://github.com/tty228/luci-app-serverchan -b master openwrt/package/luci-app-serverchan
         git clone --depth 1 https://github.com/lwz322/luci-app-k3screenctrl -b master openwrt/package/luci-app-k3screenctrl
-        git clone --depth 1 https://github.com/lwz322/k3screenctrl -b master openwrt/package/k3screenctrl
+        rm -rf openwrt/package/lean/k3screenctrl
+        git clone --depth 1 https://github.com/lwz322/k3screenctrl_build -b master openwrt/package/k3screenctrl_build
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
